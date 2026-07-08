@@ -82,7 +82,7 @@ func NewCmdDelete() (*cobra.Command, *Options) {
 
 	cmd.Flags().BoolVarP(&o.NoSourceConfig, "no-source", "", false, "Do not remove the repository from the '.jx/gitops/source-config/yaml' file - so that a new release will come back")
 
-	o.EnvironmentPullRequestOptions.ScmClientFactory.AddFlags(cmd)
+	o.ScmClientFactory.AddFlags(cmd)
 
 	eo := &o.EnvironmentPullRequestOptions
 	cmd.Flags().StringVarP(&eo.CommitTitle, "commit-title", "", "", "the commit title")
@@ -92,7 +92,7 @@ func NewCmdDelete() (*cobra.Command, *Options) {
 	cmd.Flags().StringVarP(&o.Repository, "repo", "r", "", "The name of the repository to remove")
 	cmd.Flags().StringVarP(&o.RemoveNamespace, "remove-ns", "", "", "The namespace to remove the app from. If blank remove from all deployed namespaces")
 
-	o.BaseOptions.AddBaseFlags(cmd)
+	o.AddBaseFlags(cmd)
 
 	return cmd, o
 }
@@ -137,7 +137,7 @@ func (o *Options) Validate() error {
 	}
 
 	// lazy create git
-	o.EnvironmentPullRequestOptions.Git()
+	o.Git()
 	return nil
 }
 
@@ -160,7 +160,7 @@ func (o *Options) Run() error {
 		return o.DeleteApp(dir)
 	}
 
-	_, err = o.EnvironmentPullRequestOptions.Create(o.GitURL, "", o.Labels, o.AutoMerge)
+	_, err = o.Create(o.GitURL, "", o.Labels, o.AutoMerge)
 	if err != nil {
 		return fmt.Errorf("failed to create Pull Request on repository %s: %w", o.GitURL, err)
 	}
