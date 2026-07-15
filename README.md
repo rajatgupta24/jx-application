@@ -6,7 +6,7 @@
 [![Apache](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/jenkins-x-plugins/jx-application/blob/master/LICENSE)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://slack.k8s.io/)
 
-`jx-application` is a small command line tool for working with applications deployed in [Jenkins X](https://jenkins-x.io/) environments.
+`jx-application` is a small command line tool for working with applications deployed in [JayeX](https://jayex.io/) environments.
 
 ## Commands
 

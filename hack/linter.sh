@@ -11,11 +11,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if ! [ -x "$(command -v golangci-lint)" ]; then
 	echo "Installing GolangCI-Lint"
-	${DIR}/install_golint.sh -b $GOPATH/bin v1.29.0
+	${DIR}/install_golint.sh -b $GOPATH/bin v2.12.2
 fi
 
 export GO111MODULE=on
 golangci-lint run \
-  --timeout 30m \
+  --config "${DIR}/../.golangci.yml" \
+  --timeout 15m0s \
   --verbose \
-  --build-tags build
+  ./...

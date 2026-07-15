@@ -22,7 +22,7 @@ import (
 
 // IsPreview returns true if the environment is a preview environment
 func (e *Environment) IsPreview() bool {
-	return e.Environment.Spec.Kind == v1.EnvironmentKindTypePreview
+	return e.Spec.Kind == v1.EnvironmentKindTypePreview
 }
 
 // Environments loops through all applications in a list and returns a map with
@@ -43,7 +43,7 @@ func (l *List) Environments() map[string]v1.Environment {
 
 // Name returns the application name
 func (a *Application) Name() string {
-	return naming.ToValidName(a.SourceRepository.Spec.Repo)
+	return naming.ToValidName(a.Spec.Repo)
 }
 
 // getVersion returns the version from the labels on the deployment if it can be deduced
